@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/sete20/meet-others/issues"
   },
-  "homepage": "https://github.com/sete20/meet-others#readme"
+  "homepage": "https://github.com/sete20/meet-others#readme",
+  "dependencies": {
+    "cros": "^1.0.1",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.4.1",
+    "sweetalert": "^2.1.2"
+  }
 }
