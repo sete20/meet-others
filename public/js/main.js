@@ -2,7 +2,7 @@ import * as store from './store.js';
 import * as wws from './wss.js';
 import * as constants from './constants.js';
 import * as webRtcHandler from './webRtcHandler.js';
-import { showIncomingCallDialog } from './ui';
+import { getIncomingCallDialog } from './elements.js';
 // send socket to wss file to handle the events
 const socket = io('/');
 wws.registerSocketEvents(socket);
@@ -20,7 +20,7 @@ personalCodeChatButton.addEventListener('click', () => {
       const calleePersonalCode = document.getElementById('personal_code_input').value;
       if (calleePersonalCode.length > 8) {
             
-            const callType = constants.typeType.CHAT_PERSONAL_CODE;
+            const callType = constants.callType.CHAT_PERSONAL_CODE;
             webRtcHandler.sendPreOffer(calleePersonalCode,callType);
       }
       
@@ -32,8 +32,8 @@ const personalVideoChatButton = document.getElementById('personal_code_video_but
 personalVideoChatButton.addEventListener('click', () => {
       const calleePersonalCode = document.getElementById('personal_code_input').value;
        if (calleePersonalCode.length > 8 ) {
-             const callType = constants.typeType.VIDEO_PERSONAL_CODE;
+             const callType = constants.callType.VIDEO_PERSONAL_CODE;
              webRtcHandler.sendPreOffer(calleePersonalCode,callType);
       }
 });
-showIncomingCallDialog("VIDEO",()=>{},()=>{});
+// getIncomingCallDialog("VIDEO",()=>{},()=>{});

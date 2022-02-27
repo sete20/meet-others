@@ -29,6 +29,7 @@ io.on('connection', function (socket) {
 
       socket.on('pre-offer-server', (data) => {
             const { calleePersonalCode, callType } = data;
+                  // io.to(calleePersonalCode).emit('pre-offer-client-side',data);  
             //  && callerPersonalCode !== socket.id
             if (connectedPeers.includes(calleePersonalCode) && calleePersonalCode != socket.id) {
                   const data = {
