@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const { emit } = require('process');
 
 const PORT = process.env.PORT || 3000;
 
@@ -25,6 +26,20 @@ io.on('connection', function (socket) {
       } else {
             console.log('the socket id '+  socket.id + ' is already part of the current online users');
       }
+
+      socket.on('pre-offer-server', (data) => {
+            const { calleePersonalCode, callType } = data;
+            //  && callerPersonalCode !== socket.id
+            if (connectedPeers.includes(calleePersonalCode) && calleePersonalCode != socket.id) {
+                  const data = {
+                        callerPersonalCode: socket.id,
+                        callType
+                  };
+                  io.to(calleePersonalCode).emit('pre-offer-client-side',data);  
+            }
+       
+
+      });
       socket.on('disconnect', () =>{
           if (connectedPeers.indexOf(socket.id)  !== -1){
              connectedPeers =   connectedPeers.filter((socket_id) => {
