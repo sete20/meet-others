@@ -1,39 +1,49 @@
-import * as store from './store.js';
-import * as wws from './wss.js';
-import * as constants from './constants.js';
-import * as webRtcHandler from './webRtcHandler.js';
-import { getIncomingCallDialog } from './elements.js';
-// send socket to wss file to handle the events
-const socket = io('/');
-wws.registerSocketEvents(socket);
+import * as store from "./store.js";
+import * as wss from "./wss.js";
+import * as webRTCHandler from "./webRTCHandler.js";
+import * as constants from "./constants.js";
 
-// personal code copy button event
-const personalCodeCopyButton = document.getElementById('personal_code_copy_button');
-personalCodeCopyButton.addEventListener('click', () => {
-      const personalCode = store.getState().socketId;
-      navigator.clipboard && navigator.clipboard.writeText(personalCode);
+// initialization of socketIO connection
+const socket = io("/");
+wss.registerSocketEvents(socket);
+webRTCHandler.getLocalPreview();
+//register event listener for personal code copy button
+const personalCodeCopyButton = document.getElementById(
+  "personal_code_copy_button"
+);
+personalCodeCopyButton.addEventListener("click", () => {
+  const personalCode = store.getState().socketId;
+  navigator.clipboard && navigator.clipboard.writeText(personalCode);
 });
 
-// personal code chat button event
-const personalCodeChatButton = document.getElementById('personal_code_chat_button');
-personalCodeChatButton.addEventListener('click', () => {
-      const calleePersonalCode = document.getElementById('personal_code_input').value;
-      if (calleePersonalCode.length > 8) {
-            
-            const callType = constants.callType.CHAT_PERSONAL_CODE;
-            webRtcHandler.sendPreOffer(calleePersonalCode,callType);
-      }
-      
+// register event listeners for connection buttons
+
+const personalCodeChatButton = document.getElementById(
+  "personal_code_chat_button"
+);
+
+const personalCodeVideoButton = document.getElementById(
+  "personal_code_video_button"
+);
+
+personalCodeChatButton.addEventListener("click", () => {
+  console.log("chat button clicked");
+
+  const calleePersonalCode = document.getElementById(
+    "personal_code_input"
+  ).value;
+  const callType = constants.callType.CHAT_PERSONAL_CODE;
+
+  webRTCHandler.sendPreOffer(callType, calleePersonalCode);
 });
 
+personalCodeVideoButton.addEventListener("click", () => {
+  console.log("video button clicked");
 
-// personal code video button event
-const personalVideoChatButton = document.getElementById('personal_code_video_button');
-personalVideoChatButton.addEventListener('click', () => {
-      const calleePersonalCode = document.getElementById('personal_code_input').value;
-       if (calleePersonalCode.length > 8 ) {
-             const callType = constants.callType.VIDEO_PERSONAL_CODE;
-             webRtcHandler.sendPreOffer(calleePersonalCode,callType);
-      }
+  const calleePersonalCode = document.getElementById(
+    "personal_code_input"
+  ).value;
+  const callType = constants.callType.VIDEO_PERSONAL_CODE;
+
+  webRTCHandler.sendPreOffer(callType, calleePersonalCode);
 });
-// getIncomingCallDialog("VIDEO",()=>{},()=>{});

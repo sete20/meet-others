@@ -1,51 +1,55 @@
-/*jshint esversion: 9 */
 let state = {
-      socketId: null,
-      localStream: null,
-      remoteStream: null,
-      screenSharingStream: null,
-      allowConnectionFromStranger: false,
-      screenSharingActive: false,
+  socketId: null,
+  localStream: null,
+  remoteStream: null,
+  screenSharingActive: false,
+  screenSharingStream: null,
+  allowConnectionsFromStrangers: false,
 };
 
 export const setSocketId = (socketId) => {
-      state = {
-            ...state,
-            socketId:socketId
-      };
-      console.log(state.socketId);
-};
-export const setLocalStream = (localStream) => {
-      state = {
-            ...state,
-            localStream:localStream
-      };
-};
-export const setRemoteStream = (remoteStream) => {
-      state = {
-            ...state,
-            remoteStream:remoteStream
-      };
+  state = {
+    ...state,
+    socketId,
+  };
+  console.log(state);
 };
 
-export const setScreenSharingStream = (screenSharingStream) => {
-      state = {
-            ...state,
-            screenSharingStream:screenSharingStream
-      };
+export const setLocalStream = (stream) => {
+  state = {
+    ...state,
+    localStream: stream,
+  };
 };
-export const setAllowConnectionFromStranger = (allowConnectionFromStranger) => {
-      state = {
-            ...state,
-            allowConnectionFromStranger:allowConnectionFromStranger
-      };
+
+export const setAllowConnectionsFromStrangers = (allowConnection) => {
+  state = {
+    ...state,
+    allowConnectionsFromStrangers: allowConnection,
+  };
 };
+
 export const setScreenSharingActive = (screenSharingActive) => {
-      state = {
-            ...state,
-            screenSharingActive:screenSharingActive
-      };
+  state = {
+    ...state,
+    screenSharingActive,
+  };
 };
+
+export const setScreenSharingStream = (stream) => {
+  state = {
+    ...state,
+    screenSharingStream: stream,
+  };
+};
+
+export const setRemoteStream = (stream) => {
+  state = {
+    ...state,
+    remoteStream: stream,
+  };
+};
+
 export const getState = () => {
-      return state;
+  return state;
 };
