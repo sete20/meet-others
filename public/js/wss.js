@@ -24,15 +24,16 @@ export const registerSocketEvents = (socket) => {
   });
 
   socket.on('webRTC-signaling-client-side', (data) => {
-    console.log(data);
     switch (data.type) {
       case constants.webRtcSignaling.OFFER:
-        webRTCHandler.handleWebRtcOffer(data);
+        webRTCHandler.handleWebRTCOffer(data);
         break;
       case constants.webRtcSignaling.ANSWER:
-        webRTCHandler.handleWebRtcAnswer(data);
+        webRTCHandler.handleWebRTCAnswer(data);
       break;
-        // case constants.webRtcSignaling.ICE_CANDIDATE:
+      case constants.webRtcSignaling.ICE_CANDIDATE:
+        webRTCHandler.handleWebRTCCandidate(data);
+        break;
       default:
         return;
         
@@ -44,12 +45,12 @@ export const registerSocketEvents = (socket) => {
 
 export const sendPreOffer = (data) => {
   console.log("emmiting to server pre offer event");
-  socketIO.emit("pre-offer", data);
+  socketIO.emit("pre-offer-server-side", data);
 };
 
 export const sendPreOfferAnswer = (data) => {
-  socketIO.emit("pre-offer-answer", data);
+  socketIO.emit("pre-offer-answer-server-side", data);
 };
 export const sendDataUsingWebRtcSignaling = (data)=>{
-  socketIO.emit('webRTC-signaling', data);
+  socketIO.emit('webRTC-signaling-server-side', data);
 };

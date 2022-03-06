@@ -18,7 +18,7 @@ let connectedPeers = [];
 io.on("connection", (socket) => {
   connectedPeers.push(socket.id);
 
-  socket.on("pre-offer", (data) => {
+  socket.on("pre-offer-server-side", (data) => {
     console.log("pre-offer-came");
     const { calleePersonalCode, callType } = data;
     // check if exists in users connected
@@ -42,14 +42,14 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("pre-offer-answer", (data) => {
+  socket.on("pre-offer-answer-server-side", (data) => {
     const { callerSocketId } = data;
 
     if (connectedPeers.includes(callerSocketId) && callerSocketId != socket.id) {
       io.to(data.callerSocketId).emit("pre-offer-answer-client-side", data);
     }
   });
-  socket.on('webRTC-signaling', (data) => {
+  socket.on('webRTC-signaling-server-side', (data) => {
     const { connectedUserSocketId } = data;
     console.log('webrtc',connectedUserSocketId);
     if (connectedPeers.includes(connectedUserSocketId) && connectedUserSocketId != socket.id) {

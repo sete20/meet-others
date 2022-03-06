@@ -7,7 +7,10 @@ export const updatePersonalCode = (personalCode) => {
   );
   personalCodeParagraph.innerHTML = personalCode;
 };
-
+export const updateRemoteVideo = (stream) => {
+  const remoteVideo = document.getElementById("remote_video");
+  remoteVideo.srcObject = stream;
+};
 export const showIncomingCallDialog = (
   callType,
   acceptCallHandler,
@@ -144,14 +147,30 @@ const showElement = (element) => {
   }
 };
 export const updateLocalVideo = (stream) => {
-  const localVideo = document.getElementById('local_video');
+  const localVideo = document.getElementById("local_video");
   localVideo.srcObject = stream;
-  localVideo.addEventListener('loadermetadata', () => {
+
+  localVideo.addEventListener("loadedmetadata", () => {
     localVideo.play();
   });
-}
+};
 
 export const updateRemoteStream = (remoteStream) => {
   const remoteVideo = document.getElementById('remote_video');
   remoteVideo.srcOject = remoteStream;
+};
+const micOnImageSrc = './utils/images/mic.png';
+const micOffImageSrc = './utils/images/micOff.png';
+
+export const updateMicButton = (micActive) => {
+  const getButtonImage = document.getElementById('mic_button_image');
+  getButtonImage.src = micActive ? micOffImageSrc : micOnImageSrc;
+};
+
+const cameraOnImageSrc = './utils/images/camera.png';
+const cameraOffImageSrc = './utils/images/cameraOff.png';
+
+export const updateCameraButton = (cameraActive) => {
+  const getButtonImage = document.getElementById('camera_button_image');
+  getButtonImage.src = cameraActive ? cameraOffImageSrc : cameraOnImageSrc;
 };
