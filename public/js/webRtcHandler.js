@@ -46,7 +46,7 @@ const createPeerConnection = () => {
     };
 
     dataChannel.onmessage = (event) => {
-      console.log("message came from data channel");
+      console.log("message came from data channel",event.data);
       const message = JSON.parse(event.data);
       ui.appendMessage(message);
     };
@@ -142,7 +142,6 @@ const acceptCallHandler = () => {
 
 const rejectCallHandler = () => {
   console.log("call rejected");
-  sendPreOfferAnswer();
   sendPreOfferAnswer(constants.preOfferAnswer.CALL_REJECTED);
 };
 

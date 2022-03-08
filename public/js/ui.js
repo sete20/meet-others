@@ -174,3 +174,14 @@ export const updateCameraButton = (cameraActive) => {
   const getButtonImage = document.getElementById('camera_button_image');
   getButtonImage.src = cameraActive ? cameraOffImageSrc : cameraOnImageSrc;
 };
+export const appendMessage = (message, right = false) => {
+  const messagesContainer = document.getElementById('messages_container');
+  const messageELement = right ? elements.getRightMessage(message) : elements.getLeftMessage(message);
+  messagesContainer.appendChild(messageELement);
+};
+export const clearMessenger = () => {
+  const messagesContainer = document.getElementById('messages_container');
+  messagesContainer.querySelector('*').forEach(n => {
+    n.remove();
+  });
+};
