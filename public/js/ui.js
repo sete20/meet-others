@@ -185,3 +185,30 @@ export const clearMessenger = () => {
     n.remove();
   });
 };
+//recording
+export const showRecordingPanel = () => {
+  const recordingButton = document.getElementById('video_recording_buttons');
+  showElement(recordingButton);
+  //hide recording button if it is active
+  const startButton = document.getElementById('start_recording_button');
+  hideElement(startButton);
+}
+
+export const resetRecordingButtons=() => {
+   const startButton = document.getElementById('start_recording_button');
+  showElement(startButton);
+
+  const recordingButton = document.getElementById('video_recording_buttons');
+  hideElement(recordingButton);
+}
+export const switchRecordingButtons = (switchForResumeButton = false) => {
+  const resumeButton = document.getElementById('resume_recording_button');
+  const pauseButton = document.getElementById('pause_recording_button');
+  if (switchForResumeButton) {
+    hideElement(pauseButton);
+    showElement(resumeButton);
+  } else {
+       hideElement(resumeButton);
+    showElement(pauseButton);
+  }
+}
